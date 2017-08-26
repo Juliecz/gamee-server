@@ -11,9 +11,11 @@ module.exports = (app) => {
 	
 	app.get('/recipes', recipes.getAll);
 	app.get('/recipes/:id', recipes.getById);
+	app.get('/recipes/author/:id', recipes.getByAuthorId);
 	app.post('/recipes', recipes.addRecipe);
 	app.put('/recipes', recipes.updateRecipe);
 	
+	app.post('/signin', users.signin);
 	app.get('/users', users.users);
 	app.get('*', (req, res) => res.sendStatus(404));
 };
