@@ -13,11 +13,6 @@ exports.getById = (req, res, next) => {
 		.catch(next);
 };
 
-exports.getByAuthorId = (req, res, next) => {
-	console.log(req.params);
-	res.send(recipes[0]);
-};
-
 exports.addRecipe = (req, res, next) => {
 	const recipe = new Recipe(req.body);
 	recipe.save()

@@ -1,19 +1,5 @@
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const secret = 'gamee-cookbook-secret';
-
-const users = [
-	{
-		_id: 1,
-		name: 'Yuliya',
-		surname: 'Ovchinnikova',
-		username: 'yuliya'
-	}
-];
-
-exports.users = (req, res, next) => {
-	res.send(users);
-};
+const auth = require('../services/authorization');
 
 exports.signin = (req, res, next) => {
 	console.log(req.body);
@@ -24,7 +10,7 @@ exports.signup = (req, res, next) => {
 	const user = new User(req.body);
 	return user.save()
 		.then((user) => {
-			const token = jwt.sign({ name: user.name, email: user.email, _id: user._id }, secret);
+			const token = auth.createToken({ name: user.name, email: user.email, _id: user._id });
 			res.send(token);
 		})
 		.catch(next);
