@@ -16,6 +16,7 @@ module.exports = (app) => {
 	app.put('/recipes', recipes.updateRecipe);
 	app.delete('/recipes/:id', recipes.deleteRecipe);
 	
+	app.post('/signup', users.signup);
 	app.post('/signin', users.signin);
 	app.get('/users', users.users);
 	app.get('*', (req, res) => res.sendStatus(404));

@@ -1,5 +1,4 @@
 const Recipe = require('../models/Recipe');
-const User = require('../models/User');
 
 exports.getAll = (req, res, next) => {
 	Recipe.find()
