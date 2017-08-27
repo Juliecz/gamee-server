@@ -14,6 +14,7 @@ module.exports = (app) => {
 	app.get('/recipes/author/:id', recipes.getByAuthorId);
 	app.post('/recipes', recipes.addRecipe);
 	app.put('/recipes', recipes.updateRecipe);
+	app.delete('/recipes/:id', recipes.deleteRecipe);
 	
 	app.post('/signin', users.signin);
 	app.get('/users', users.users);
