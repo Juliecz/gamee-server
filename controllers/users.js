@@ -4,8 +4,12 @@ const auth = require('../services/authorization');
 
 exports.signin = (req, res, next) => {
 	User.findOne({ email: req.body.email })
-		.then((user) =>
-			Promise.all([bcrypt.compare(req.body.password, user.hashedPassword), user]))
+		.then((user) => {
+			if (!user) {
+				throw new Error('User not found');
+			}
+			return Promise.all([bcrypt.compare(req.body.password, user.hashedPassword), user]);
+		})
 		.then(([result, user]) => {
 			if (result) {
 				res.send(auth.createToken({name: user.name, email: user.email, _id: user._id}));
